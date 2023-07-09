@@ -1,11 +1,11 @@
-package com.fullstack.foodex1.model;
+package com.foodex.foodex1.problems;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Problems")
+@Table(name = "problems")
 public class Problems {
     @Id
     private Integer id;

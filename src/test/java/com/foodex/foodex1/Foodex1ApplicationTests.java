@@ -1,4 +1,4 @@
-package com.fullstack.foodex1;
+package com.foodex.foodex1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
