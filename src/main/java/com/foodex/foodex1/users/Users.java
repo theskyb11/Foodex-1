@@ -14,7 +14,7 @@ public class Users {
     @Id
     private String username;
     private String name;
-    private Integer phone;
+    private Long phone;
     private String email;
     private String address;
     private String password;
@@ -32,7 +32,7 @@ public class Users {
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item_rate> item_rate;
 
-    public Users(String username, String name, Integer phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate) {
+    public Users(String username, String name, Long phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate) {
         this.username = username;
         this.name = name;
         this.phone = phone;
@@ -67,11 +67,11 @@ public class Users {
         this.name = name;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
