@@ -1,5 +1,6 @@
 package com.foodex.foodex1.restaurants;
 
+import com.foodex.foodex1.cart.Cart;
 import com.foodex.foodex1.items.Items;
 import com.foodex.foodex1.res_images.Res_images;
 import com.foodex.foodex1.res_rate.Res_rate;
@@ -30,12 +31,14 @@ public class Restaurants {
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Res_images> res_images;
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> cart;
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Res_rate> res_rate;
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(name = "fk_restaurants_users"))
     private Users users;
 
-    public Restaurants(Integer res_id, String res_name, String manager, String email, Integer phone, String address, Integer res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users) {
+    public Restaurants(Integer res_id, String res_name, String manager, String email, Integer phone, String address, Integer res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users, List<Cart> cart) {
         this.res_id = res_id;
         this.res_name = res_name;
         this.manager = manager;
@@ -52,6 +55,7 @@ public class Restaurants {
         this.res_images = res_images;
         this.res_rate = res_rate;
         this.users = users;
+        this.cart = cart;
     }
 
     public Restaurants() {
@@ -172,6 +176,10 @@ public class Restaurants {
 
     public List<Res_rate> getRes_rate() {
         return res_rate;
+    }
+
+    public List<Cart> getCart() {
+        return cart;
     }
 
     public void setRes_rate(List<Res_rate> res_rate) {

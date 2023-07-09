@@ -1,5 +1,6 @@
 package com.foodex.foodex1.items;
 
+import com.foodex.foodex1.cart.Cart;
 import com.foodex.foodex1.item_images.Item_images;
 import com.foodex.foodex1.item_rate.Item_rate;
 import com.foodex.foodex1.restaurants.Restaurants;
@@ -22,9 +23,11 @@ public class Items {
     @OneToMany(mappedBy = "items", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item_images> item_images;
     @OneToMany(mappedBy = "items", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> cart;
+    @OneToMany(mappedBy = "items", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item_rate> item_rate;
 
-    public Items(Long item_id, String item_name, Float price, Float rating, String description, Restaurants restaurants, List<Item_images> item_images, List<Item_rate> item_rate) {
+    public Items(Long item_id, String item_name, Float price, Float rating, String description, Restaurants restaurants, List<Item_images> item_images, List<Item_rate> item_rate, List<Cart> cart) {
         this.item_id = item_id;
         this.item_name = item_name;
         this.price = price;
@@ -33,6 +36,7 @@ public class Items {
         this.restaurants = restaurants;
         this.item_images = item_images;
         this.item_rate = item_rate;
+        this.cart = cart;
     }
 
     public Items() {
@@ -96,6 +100,10 @@ public class Items {
 
     public List<Item_rate> getItem_rate() {
         return item_rate;
+    }
+
+    public List<Cart> getCart() {
+        return cart;
     }
 
     public void setItem_rate(List<Item_rate> item_rate) {
