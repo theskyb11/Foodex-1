@@ -50,3 +50,21 @@ describe problems;
 select * from problems;
 drop table problems;
 delete from problems;
+
+#Offers
+describe offers;
+select * from offers;
+drop table offers;
+delete from offers;
+
+#Cart
+describe cart;
+select * from cart;
+drop table cart;
+delete from cart;
+
+#Deliver_address
+describe deliver_address;
+select * from deliver_address;
+drop table deliver_address;
+delete from deliver_address;
