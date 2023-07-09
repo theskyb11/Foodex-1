@@ -1,5 +1,7 @@
 package com.foodex.foodex1.users;
 
+import com.foodex.foodex1.Deliver_address.Deliver_address;
+import com.foodex.foodex1.cart.Cart;
 import com.foodex.foodex1.res_rate.Res_rate;
 import com.foodex.foodex1.restaurants.Restaurants;
 import com.foodex.foodex1.item_rate.Item_rate;
@@ -32,7 +34,13 @@ public class Users {
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item_rate> item_rate;
 
-    public Users(String username, String name, Long phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate) {
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Deliver_address> Deliver_address;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> cart;
+
+    public Users(String username, String name, Long phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate, List<Deliver_address> Deliver_address, List<Cart> cart) {
         this.username = username;
         this.name = name;
         this.phone = phone;
@@ -45,6 +53,8 @@ public class Users {
         this.restaurants = restaurants;
         this.res_rate = res_rate;
         this.item_rate = item_rate;
+        this.Deliver_address = Deliver_address;
+        this.cart = cart;
     }
 
     public Users() {
@@ -141,6 +151,16 @@ public class Users {
 
     public List<Item_rate> getItem_rate() {
         return item_rate;
+    }
+
+    public List<Deliver_address> getDeliver_address() {
+        return Deliver_address;
+    }
+    public List<Cart> getCart() {
+        return cart;
+    }
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
     }
 
     public void setItem_rate(List<Item_rate> item_rate) {

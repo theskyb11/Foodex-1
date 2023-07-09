@@ -17,7 +17,7 @@ public class Res_rate {
     @Column(name = "username",insertable = false, updatable = false)
     private String username;
     @Column(name = "res_id", insertable = false, updatable = false)
-    private Integer res_id;
+    private Long res_id;
     @Column(name = "ratings")
     private float ratings;
     @ManyToOne
@@ -27,7 +27,7 @@ public class Res_rate {
     @JoinColumn(name = "res_id", referencedColumnName = "res_id", foreignKey = @ForeignKey(name = "fk_res_rate_restaurants"))
     private Restaurants restaurants;
 
-    public Res_rate(Long id, String username, Integer res_id, float ratings, Users users, Restaurants restaurants) {
+    public Res_rate(Long id, String username, Long res_id, float ratings, Users users, Restaurants restaurants) {
         this.id = id;
         this.username = username;
         this.res_id = res_id;
@@ -56,11 +56,11 @@ public class Res_rate {
         this.username = username;
     }
 
-    public Integer getRes_id() {
+    public Long getRes_id() {
         return res_id;
     }
 
-    public void setRes_id(Integer res_id) {
+    public void setRes_id(Long res_id) {
         this.res_id = res_id;
     }
 

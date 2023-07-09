@@ -2,6 +2,7 @@ package com.foodex.foodex1.restaurants;
 
 import com.foodex.foodex1.cart.Cart;
 import com.foodex.foodex1.items.Items;
+import com.foodex.foodex1.offers.Offers;
 import com.foodex.foodex1.res_images.Res_images;
 import com.foodex.foodex1.res_rate.Res_rate;
 import com.foodex.foodex1.users.Users;
@@ -14,13 +15,13 @@ import java.util.List;
 @Table(name = "restaurants")
 public class Restaurants {
     @Id
-    private Integer res_id;
+    private Long res_id;
     private String res_name;
     private String manager;
     private String email;
-    private Integer phone;
+    private Long phone;
     private String address;
-    private Integer res_phone;
+    private Long res_phone;
     private String cuisine;
     private Integer type;
     private float rating;
@@ -34,11 +35,13 @@ public class Restaurants {
     private List<Cart> cart;
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Res_rate> res_rate;
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Offers> offers;
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(name = "fk_restaurants_users"))
     private Users users;
 
-    public Restaurants(Integer res_id, String res_name, String manager, String email, Integer phone, String address, Integer res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users, List<Cart> cart) {
+    public Restaurants(Long res_id, String res_name, String manager, String email, Long phone, String address, Long res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users, List<Cart> cart, List<Offers> offers) {
         this.res_id = res_id;
         this.res_name = res_name;
         this.manager = manager;
@@ -56,17 +59,18 @@ public class Restaurants {
         this.res_rate = res_rate;
         this.users = users;
         this.cart = cart;
+        this.offers = offers;
     }
 
     public Restaurants() {
 
     }
 
-    public Integer getRes_id() {
+    public Long getRes_id() {
         return res_id;
     }
 
-    public void setRes_id(Integer res_id) {
+    public void setRes_id(Long res_id) {
         this.res_id = res_id;
     }
 
@@ -94,11 +98,11 @@ public class Restaurants {
         this.email = email;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -110,11 +114,11 @@ public class Restaurants {
         this.address = address;
     }
 
-    public Integer getRes_phone() {
+    public Long getRes_phone() {
         return res_phone;
     }
 
-    public void setRes_phone(Integer res_phone) {
+    public void setRes_phone(Long res_phone) {
         this.res_phone = res_phone;
     }
 
@@ -180,6 +184,16 @@ public class Restaurants {
 
     public List<Cart> getCart() {
         return cart;
+    }
+
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
+    }
+    public List<Offers> getOffers() {
+        return offers;
+    }
+    public void setOffers(List<Offers> offers) {
+        this.offers = offers;
     }
 
     public void setRes_rate(List<Res_rate> res_rate) {
