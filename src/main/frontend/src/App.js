@@ -1,13 +1,12 @@
 import React from 'react';
-import SignUpForm from './SignUpForm';
+import Signup from './pages/Signup';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import Profile from "./Profile";
-import MainContainer from "./home";
-import ContactForm from "./ContactForm";
-import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Profile from "./pages/Account";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
     return (
@@ -15,10 +14,12 @@ function App() {
             <ToastContainer />
             <Router>
                 <Routes>
-                    <Route exact path="/" element={<MainContainer />} />
-                    <Route exact path="/contact" element={<ContactForm />} />
-                    <Route exact path="/register" element={<SignUpForm />} />
-                    <Route exact path="/profile" element={<Profile />} />
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/home" element={<Home />} />
+                    <Route exact path="/contact" element={<Contact />} />
+                    <Route exact path="/register" element={<Signup />} />
+                    <Route exact path="/login" element={<Login />} />
+                    <Route exact path="/account" element={<Profile />} />
                 </Routes>
             </Router>
         </div>
