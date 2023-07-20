@@ -75,6 +75,11 @@ public class UsersController {
         return "User with username = " + username + " has been deleted successfully!!!";
     }
 
+    @GetMapping("/user/email/{email}")
+    Users getUserByEmail(@PathVariable String email) {
+        return usersRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("Email: " + email));
+    }
 }
 
 

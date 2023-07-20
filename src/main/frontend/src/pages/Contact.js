@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './contact.css';
-import Footer from './footer';
-import Navbar from './navbar-main';
+import '../features/contact/assets/contact.css';
+import Footer from '../layouts/Footer';
+import Navbar from '../layouts/Navbar';
 
-function ContactForm() {
+function Contact() {
   const defaultDropdownValue = 'Difficulty in ordering online';
   const defaultName = '';
   const defaultEmail = '';
@@ -103,4 +103,4 @@ function ContactForm() {
   );
 }
 
-export default ContactForm;
+export default Contact;
