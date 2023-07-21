@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Profile from "../features/account/components/Profile";
 import PaymentMethods from "../features/account/components/PaymentMethods";
 import PrivacySecurity from "../features/account/components/Privacy";
@@ -6,6 +6,7 @@ import Orders from "../features/account/components/Orders";
 import Transactions from "../features/account/components/Transactions";
 import Settings from "../features/account/components/Settings";
 import Navbar from "../layouts/Navbar";
+import LoadingBar from "react-top-loading-bar";
 
 function Account() {
     const [selectedTab, setSelectedTab] = useState('profile');
@@ -30,8 +31,32 @@ function Account() {
         }
     };
 
+    const [progress, setProgress] = useState(0);
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress((prevProgress) => {
+                const newProgress = prevProgress + 100;
+                if (newProgress >= 100) {
+                    clearInterval(timer);
+                }
+                return newProgress;
+            });
+        }, 50);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
     return (
         <div className={"bg-gray-100 w-full h-screen"}>
+            <LoadingBar
+                color='#1e53ff'
+                progress={progress}
+                loaderSpeed={250}
+            />
             <Navbar />
             <h4 className={"font-bold text-2xl pl-10 pt-8"}>Account Settings</h4>
             <div className={"rounded-2xl  bg-white flex w-8/9 mx-10 my-8 "}>

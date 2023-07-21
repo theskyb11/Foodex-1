@@ -6,6 +6,8 @@ import Footer from "../layouts/Footer";
 import img_hero from '../assets/img/img-hero.png'
 import banner1 from '../assets/img/banner 1.png'
 import banner2 from '../assets/img/banner 2.png'
+// import LoadingBar from "../components/LoadingBar";
+import LoadingBar from "react-top-loading-bar";
 const Home = () => {
     const [location, setLocation] = useState('');
 
@@ -49,6 +51,27 @@ const Home = () => {
     const handleLoginClick = () => {
         localStorage.setItem('previousLink', 'home')
     }
+
+    const [progress, setProgress] = useState(0);
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress((prevProgress) => {
+                const newProgress = prevProgress + 100;
+                if (newProgress >= 100) {
+                    clearInterval(timer);
+                }
+                return newProgress;
+            });
+        }, 50);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
+
 
     return (
         // <div className="main-container">
@@ -96,6 +119,11 @@ const Home = () => {
         // </div>
 
         <div className={"h-screen scroll-smooth"}>
+            <LoadingBar
+                color='#1e53ff'
+                progress={progress}
+                loaderSpeed={250}
+            />
             <nav className="bg-white border-gray-200">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link to={"/"} className="flex items-center">

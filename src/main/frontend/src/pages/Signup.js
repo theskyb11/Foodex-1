@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {PostUser} from "../features/authentication/services/postUser";
 import highlight from '../features/authentication/assets/highlight.jpg';
 import {Link} from "react-router-dom";
 import logo from '../assets/img/logo-exp-light.png';
 import PasswordStrengthBar from "react-password-strength-bar";
+import LoadingBar from "react-top-loading-bar";
 
 const SignUpForm = () => {
     const [username, setUsername] = useState('');
@@ -52,8 +53,32 @@ const SignUpForm = () => {
         }
     };
 
+    const [progress, setProgress] = useState(0);
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress((prevProgress) => {
+                const newProgress = prevProgress + 100;
+                if (newProgress >= 100) {
+                    clearInterval(timer);
+                }
+                return newProgress;
+            });
+        }, 50);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
     return (
         <div className={"parent-container m-auto grid grid-cols-2 max-md:grid-cols-1 h-screen"}>
+            <LoadingBar
+                color='#1e53ff'
+                progress={progress}
+                loaderSpeed={250}
+            />
             <div className={"tile h-full"}>
                 <div className={"flex flex-col items-center justify-center h-full"}>
                     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -184,7 +209,7 @@ const SignUpForm = () => {
                                                        onChange={(e) => setPassword(e.target.value)}/>
                                             </div>
 
-                                            <PasswordStrengthBar password={password} />
+                                            <PasswordStrengthBar password={password}/>
                                         </div>
 
                                         <div>
@@ -194,7 +219,8 @@ const SignUpForm = () => {
                                             </button>
                                         </div>
 
-                                        <p className={"text-blue mt-6 cursor-pointer"} onClick={handleGoBackClick}>Go Back</p>
+                                        <p className={"text-blue mt-6 cursor-pointer"} onClick={handleGoBackClick}>Go
+                                            Back</p>
                                     </div>)}
 
                                 {!showAdditionalFields && (

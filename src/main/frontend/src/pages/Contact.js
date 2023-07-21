@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../features/contact/assets/contact.css';
 import Footer from '../layouts/Footer';
 import Navbar from '../layouts/Navbar';
+import LoadingBar from "react-top-loading-bar";
 
 function Contact() {
   const defaultDropdownValue = 'Difficulty in ordering online';
@@ -50,8 +51,32 @@ function Contact() {
     };
   }, []);
 
+  const [progress, setProgress] = useState(0);
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => {
+        const newProgress = prevProgress + 100;
+        if (newProgress >= 100) {
+          clearInterval(timer);
+        }
+        return newProgress;
+      });
+    }, 50);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <div align="center">
+      <LoadingBar
+          color='#1e53ff'
+          progress={progress}
+          loaderSpeed={250}
+      />
       <Navbar />
      
       <form className="contact-form" action="https://getform.io/f/1de4d37f-ed41-4e14-b129-2fc61c5360cd" method="post">   
