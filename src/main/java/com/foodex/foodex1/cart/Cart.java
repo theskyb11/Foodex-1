@@ -4,6 +4,7 @@ import com.foodex.foodex1.items.Items;
 import com.foodex.foodex1.restaurants.Restaurants;
 import com.foodex.foodex1.users.Users;
 import jakarta.persistence.*;
+import org.apache.catalina.User;
 
 @Entity
 @Table(name = "cart",
@@ -74,8 +75,10 @@ public class Cart {
         return restaurants;
     }
 
-    public void setRestaurants(Restaurants restaurants) {
+    public void setRestaurants(Restaurants restaurants, Users users, Items items) {
         this.restaurants = restaurants;
+        this.items = items;
+        this.users = users;
     }
 
 

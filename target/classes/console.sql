@@ -9,6 +9,12 @@ select * from users;
 drop table users;
 delete from users;
 
+#User Images
+describe user_images;
+select * from user_images;
+drop table user_images;
+delete from user_images;
+
 #Restaurants
 describe restaurants;
 select * from restaurants;

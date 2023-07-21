@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../features/authentication/assets/login.css';
 import logo from "../assets/img/logo-exp-light.png";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import highlight from "../features/authentication/assets/highlight.jpg";
 import {signInUser} from "../features/authentication/services/loginUser";
 import {toast} from "react-toastify";
@@ -10,13 +10,25 @@ const Login = () => {
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const previousLink = localStorage.getItem('previousLink');
+
+    if (isLoggedIn === 'true') {
+      setTimeout(() => {
+        window.location.href = previousLink
+      }, 1000)
+    }
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     signInUser(email, password)
         .then((response) => {
           if (response) {
-            // Authentication successful
+            localStorage.setItem('isLoggedIn', true);
+
             if (remember) {
               localStorage.setItem('email', email);
               localStorage.setItem('remember', true);
@@ -26,7 +38,6 @@ const Login = () => {
             }
 
             toast.success('Sign in successful!');
-            console.log('Sign-in successful');
           } else {
             toast.error('Email or Password is incorrect!');
             console.log('Sign-in failed');

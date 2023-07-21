@@ -46,6 +46,10 @@ const Home = () => {
             });
     };
 
+    const handleLoginClick = () => {
+        localStorage.setItem('previousLink', 'home')
+    }
+
     return (
         // <div className="main-container">
         //     <div className="container-fluid jumbotron">
@@ -108,7 +112,8 @@ const Home = () => {
                                       strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
                             </svg>
                         </button>
-                        <Link className={"mx-6 py-2"} aria-current="page" to="/login">
+                        <Link className={"mx-6 py-2"} aria-current="page" to="/login"
+                        onClick={handleLoginClick}>
                             Login
                         </Link>
                         <Link className={"px-4 py-2 text-white bg-gray-800"} aria-current="page"
