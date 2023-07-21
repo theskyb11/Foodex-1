@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import logo from "../assets/img/logo-exp-light.png";
 
@@ -10,6 +10,14 @@ const Navbar = () => {
     //   setCardHidden(!cardHidden);
     // };
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // Check if the 'isLoggedIn' variable exists in localStorage
+        const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+        setIsLoggedIn(storedIsLoggedIn === 'true');
+    }, []);
+
     const handleLocationClick = () => {
         if (location !== null && location !== '') {
             // Handle location click event
@@ -17,6 +25,10 @@ const Navbar = () => {
             alert('Please set location');
         }
     };
+
+    const handleLoginClick = () => {
+        localStorage.setItem('previousLink', 'account')
+    }
 
     return (
         <nav className="bg-white border-gray-200" id={"nav-main"}>
@@ -37,7 +49,60 @@ const Navbar = () => {
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                         </svg>
                     </div>
-                    <Link className={"mx-6 py-2"} aria-current="page" to="/login">
+
+                    {isLoggedIn ? (
+                        <div>
+                            <div className="relative">
+                                <button
+                                    id="dropdownUserAvatarButton"
+                                    data-dropdown-toggle="dropdownAvatar"
+                                    className="flex items-center mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                    type="button"
+                                >
+                                    <span className="sr-only">Open user menu</span>
+                                    <img
+                                        className="w-8 h-8 rounded-full"
+                                        src=""
+                                        alt="user photo"
+                                    />
+                                </button>
+
+                                <div
+                                    id="dropdownAvatar"
+                                    className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute top-full right-0"
+                                >
+                                    <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                        <div>Bonnie Green</div>
+                                        <div className="font-medium truncate">name@flowbite.com</div>
+                                    </div>
+                                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                        aria-labelledby="dropdownUserAvatarButton">
+                                        <li>
+                                            <a href="#"
+                                               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                        </li>
+                                    </ul>
+                                    <div className="py-2">
+                                        <a href="#"
+                                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                            out</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        ) : (
+                            <div>
+                    <Link className={"mx-6 py-2"} aria-current="page" to="/login" onClick={
+                        handleLoginClick
+                    }>
                         Login
                     </Link>
                     <Link
@@ -47,6 +112,7 @@ const Navbar = () => {
                     >
                         Sign Up
                     </Link>
+                            </div>)}
                 </div>
                 <div
                     className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
