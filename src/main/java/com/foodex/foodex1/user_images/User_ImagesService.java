@@ -4,6 +4,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class User_ImagesService {
     @Autowired
@@ -17,19 +19,20 @@ public class User_ImagesService {
         return userImageRepository.save(userImage);
     }
 
-    public User_Images getUserImageById(int id) {
+    public List<User_Images> getAllUserImages() {
+        return userImageRepository.findAll();
+    }
+
+    public User_Images getUserImageById(String id) {
         return userImageRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("UserImage with id " + id + " not found."));
     }
 
-    public void deleteUserImageById(int id) {
+    public void deleteUserImageById(String id) {
         if (!userImageRepository.existsById(id)) {
             throw new EntityNotFoundException("UserImage with id " + id + " not found.");
         }
         userImageRepository.deleteById(id);
     }
-
-    // Add more methods as needed for other CRUD operations
-
 }
 

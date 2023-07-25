@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../features/contact/assets/contact.css';
 import Footer from '../layouts/Footer';
 import Navbar from '../layouts/Navbar';
-import LoadingBar from "react-top-loading-bar";
+import TopLoadingBar from "../components/TopLoadingBar";
 
 function Contact() {
   const defaultDropdownValue = 'Difficulty in ordering online';
@@ -51,36 +50,12 @@ function Contact() {
     };
   }, []);
 
-  const [progress, setProgress] = useState(0);
-
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => {
-        const newProgress = prevProgress + 100;
-        if (newProgress >= 100) {
-          clearInterval(timer);
-        }
-        return newProgress;
-      });
-    }, 50);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
   return (
     <div align="center">
-      <LoadingBar
-          color='#1e53ff'
-          progress={progress}
-          loaderSpeed={250}
-      />
+      <TopLoadingBar />
       <Navbar />
-     
       <form className="contact-form" action="https://getform.io/f/1de4d37f-ed41-4e14-b129-2fc61c5360cd" method="post">   
-           <h3>Your problems are our problems, please tell us what bothers you!!</h3>
+           <h3>Your problems are our problems, please tell us what bothers you!</h3>
         <select name="dropdown" value={dropdownValue} onChange={handleDropdownChange}>
           <option value="Difficulty in ordering online">Difficulty in ordering online</option>
           <option value="Want to give suggestions/feedback">Want to give suggestions/feedback</option>
