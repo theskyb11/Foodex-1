@@ -58,41 +58,6 @@ const Login = () => {
     setIsLoading(false);
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //
-  //   signInUser(email, password)
-  //       .then((response) => {
-  //         if (response) {
-  //           // Authentication successful
-  //
-  //           if (remember) {
-  //             localStorage.setItem('isLoggedIn', true);
-  //             localStorage.setItem('email', email);
-  //             localStorage.setItem('remember', true);
-  //           } else {
-  //             sessionStorage.setItem('isLoggedIn', true);
-  //             sessionStorage.setItem('email', email);
-  //             localStorage.removeItem('isLoggedIn');
-  //             localStorage.removeItem('email');
-  //             localStorage.removeItem('remember');
-  //           }
-  //
-  //           if(previousLink)
-  //             window.location.href = previousLink
-  //           else
-  //             window.location.href = '/home'
-  //           toast.success('Sign in successful!');
-  //         } else {
-  //           toast.error('Email or Password is incorrect!');
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         toast.error('Error while signing in!');
-  //         console.error('Error while signing in:', error);
-  //       });
-  // };
-
   return (
       <div className={"parent-container m-auto grid grid-cols-2 max-md:grid-cols-1 h-screen"}>
         <TopLoadingBar />
