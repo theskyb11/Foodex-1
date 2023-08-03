@@ -7,6 +7,8 @@ import Profile from "./pages/Account";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import AddRestaurant from "./pages/AddRestaurant";
+import Items from "./pages/Items";
 
 function App() {
     return (
@@ -17,9 +19,12 @@ function App() {
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/home" element={<Home />} />
                     <Route exact path="/contact" element={<Contact />} />
+                    <Route exact path="/items" element={<Items />} />
                     <Route exact path="/register" element={<Signup />} />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/account" element={<Profile />} />
+                    <Route exact path="/restaurants" element={<Profile />} />
+                    <Route exact path="/partner" element={<AddRestaurant />} />
                 </Routes>
             </Router>
         </div>
