@@ -7,7 +7,6 @@ import Profile from "./pages/Account";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import AddRestaurant from "./pages/AddRestaurant";
 
 function App() {
     return (
@@ -21,8 +20,6 @@ function App() {
                     <Route exact path="/register" element={<Signup />} />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/account" element={<Profile />} />
-                    <Route exact path="/restaurants" element={<Profile />} />
-                    <Route exact path="/partner" element={<AddRestaurant />} />
                 </Routes>
             </Router>
         </div>
