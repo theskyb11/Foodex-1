@@ -20,7 +20,6 @@ const Navbar = () => {
         setIsHome(url.pathname === '/home' || url.pathname === '/')
 
         const handleScroll = () => {
-            // Adjust the threshold as needed to control when the translucent effect starts
             setIsTranslucent(window.scrollY > 30);
         };
 
@@ -43,11 +42,11 @@ const Navbar = () => {
     return (
         <div
             className={`duration-300 ease-in-out transition-colors fixed top-0 w-full z-50 bg-white ${
-                isTranslucent ? 'bg-opacity-85 backdrop-blur' : ''
+                isTranslucent ? 'backdrop-blur bg-opacity-80' : ''
             }`}
             id="nav-main"
         >
-        <nav className="bg-white border-gray-200" id={"nav-main"}>
+        <nav className="bg-white border-gray-200 z-50" id={"nav-main"}>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to={"/"} className="flex items-center">
                     <img src={logo} className="h-8 mr-3" alt="Foodex Logo" />
