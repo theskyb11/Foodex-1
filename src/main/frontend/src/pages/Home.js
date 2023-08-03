@@ -8,6 +8,8 @@ import banner1 from '../assets/img/banner 1.png'
 import banner2 from '../assets/img/banner 2.png'
 // import LoadingBar from "../components/LoadingBar";
 import LoadingBar from "react-top-loading-bar";
+import TopLoadingBar from "../components/TopLoadingBar";
+import Navbar from "../layouts/Navbar";
 const Home = () => {
     const [location, setLocation] = useState('');
 
@@ -51,27 +53,6 @@ const Home = () => {
     const handleLoginClick = () => {
         localStorage.setItem('previousLink', 'home')
     }
-
-    const [progress, setProgress] = useState(0);
-
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setProgress((prevProgress) => {
-                const newProgress = prevProgress + 100;
-                if (newProgress >= 100) {
-                    clearInterval(timer);
-                }
-                return newProgress;
-            });
-        }, 50);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
-
 
     return (
         // <div className="main-container">
@@ -119,70 +100,67 @@ const Home = () => {
         // </div>
 
         <div className={"h-screen scroll-smooth"}>
-            <LoadingBar
-                color='#1e53ff'
-                progress={progress}
-                loaderSpeed={250}
-            />
-            <nav className="bg-white border-gray-200">
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <Link to={"/"} className="flex items-center">
-                        <img src={logo} className="h-8 mr-3" alt="Foodex Logo"/>
-                    </Link>
-                    <div className="flex md:order-2">
-                        <button data-collapse-toggle="navbar-cta" type="button"
-                                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                aria-controls="navbar-cta" aria-expanded="false">
-                            <span className="sr-only">Open main menu</span>
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 17 14">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                      strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-                            </svg>
-                        </button>
-                        <Link className={"mx-6 py-2"} aria-current="page" to="/login"
-                        onClick={handleLoginClick}>
-                            Login
-                        </Link>
-                        <Link className={"px-4 py-2 text-white bg-gray-800"} aria-current="page"
-                              to="/register">
-                            Sign Up
-                        </Link>
-                    </div>
-                    <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-                         id="navbar-cta">
-                        <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
-                            <li>
-                                <Link className={"px-4 py-2"} aria-current="page" to="/home">
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={"px-4 py-2"} aria-current="page" to="/about">
-                                    About
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={"px-4 py-2"} aria-current="page" to="/contact">
-                                    Contact Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={"px-4 py-2"} aria-current="page" to="/items">
-                                    Items
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={"px-4 py-2"} aria-current="page" to="/restaurants">
-                                    Restaurants
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <TopLoadingBar />
+            <Navbar />
+            {/*<nav className="bg-white border-gray-200">*/}
+            {/*    <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">*/}
+            {/*        <Link to={"/"} className="flex items-center">*/}
+            {/*            <img src={logo} className="h-8 mr-3" alt="Foodex Logo"/>*/}
+            {/*        </Link>*/}
+            {/*        <div className="flex md:order-2">*/}
+            {/*            <button data-collapse-toggle="navbar-cta" type="button"*/}
+            {/*                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"*/}
+            {/*                    aria-controls="navbar-cta" aria-expanded="false">*/}
+            {/*                <span className="sr-only">Open main menu</span>*/}
+            {/*                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"*/}
+            {/*                     viewBox="0 0 17 14">*/}
+            {/*                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                          strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>*/}
+            {/*                </svg>*/}
+            {/*            </button>*/}
+            {/*            <Link className={"mx-6 py-2"} aria-current="page" to="/login"*/}
+            {/*            onClick={handleLoginClick}>*/}
+            {/*                Login*/}
+            {/*            </Link>*/}
+            {/*            <Link className={"px-4 py-2 text-white bg-gray-800"} aria-current="page"*/}
+            {/*                  to="/register">*/}
+            {/*                Sign Up*/}
+            {/*            </Link>*/}
+            {/*        </div>*/}
+            {/*        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"*/}
+            {/*             id="navbar-cta">*/}
+            {/*            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">*/}
+            {/*                <li>*/}
+            {/*                    <Link className={"px-4 py-2"} aria-current="page" to="/home">*/}
+            {/*                        Home*/}
+            {/*                    </Link>*/}
+            {/*                </li>*/}
+            {/*                <li>*/}
+            {/*                    <Link className={"px-4 py-2"} aria-current="page" to="/about">*/}
+            {/*                        About*/}
+            {/*                    </Link>*/}
+            {/*                </li>*/}
+            {/*                <li>*/}
+            {/*                    <Link className={"px-4 py-2"} aria-current="page" to="/contact">*/}
+            {/*                        Contact Us*/}
+            {/*                    </Link>*/}
+            {/*                </li>*/}
+            {/*                <li>*/}
+            {/*                    <Link className={"px-4 py-2"} aria-current="page" to="/items">*/}
+            {/*                        Items*/}
+            {/*                    </Link>*/}
+            {/*                </li>*/}
+            {/*                <li>*/}
+            {/*                    <Link className={"px-4 py-2"} aria-current="page" to="/restaurants">*/}
+            {/*                        Restaurants*/}
+            {/*                    </Link>*/}
+            {/*                </li>*/}
+            {/*            </ul>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</nav>*/}
 
-            <section className="h-full">
+            <section className="h-full mt-10">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">
                         <h1 className="max-w-2xl mb-4 text-4xl font-sans font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
@@ -234,7 +212,7 @@ const Home = () => {
                                            value={location}
                                            onChange={(e) => setLocation(e.target.value)} required/>
                                     <button type="submit"
-                                            className="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-gray-800 border border-gray-300 hover:bg-blue-800 focus:ring-4 focus:outline-none">
+                                            className="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-gray-800 border border-gray-300 hover:bg-blue-800 focus:outline-none">
                                         Search
                                     </button>
                                 </div>

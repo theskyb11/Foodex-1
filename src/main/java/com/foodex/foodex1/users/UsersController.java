@@ -1,6 +1,7 @@
 package com.foodex.foodex1.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +12,14 @@ public class UsersController {
     @Autowired
     private UsersRepository usersRepository;
 
-    //To insert new user into users table
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/user")
-    Users newUser(@RequestBody Users newUser){
+    Users newUser(@RequestBody Users newUser) {
+//        String hashedPassword = passwordEncoder.encode(newUser.getPassword());
+//        System.out.println(hashedPassword);
+//        newUser.setPassword(hashedPassword);
         return usersRepository.save(newUser);
     }
 
@@ -31,38 +37,25 @@ public class UsersController {
                 .orElseThrow(()->new UserNotFoundException(username));
     }
 
-    //To update any user by its username
-    //If User not exists then returns statement that it doesn't exist
 //    @PutMapping("/user/{username}")
-//    Users updateUser(@RequestBody Users newUser, @PathVariable String username){
+//    Users updateUser(@RequestBody Users newUser, @PathVariable String username) {
 //        return usersRepository.findById(username)
 //                .map(user -> {
-//                    user.setUsername(newUser.getUsername());
 //                    user.setAddress(newUser.getAddress());
 //                    user.setEmail(newUser.getEmail());
 //                    user.setName(newUser.getName());
-//                    user.setPassword(newUser.getPassword());
 //                    user.setPhone(newUser.getPhone());
+//
+//                    // Check if the password is updated
+//                    if (!newUser.getPassword().equals(user.getPassword())) {
+//                        String hashedPassword = passwordEncoder.encode(newUser.getPassword());
+//                        user.setPassword(hashedPassword);
+//                    }
 //
 //                    return usersRepository.save(user);
 //                })
-//                .orElseThrow(()-> new UserNotFoundException(username));
+//                .orElseThrow(() -> new UserNotFoundException(username));
 //    }
-
-    @PutMapping("/user/{username}")
-    Users updateUser(@RequestBody Users newUser, @PathVariable String username){
-        return usersRepository.findById(username)
-                .map(user -> {
-                    user.setAddress(newUser.getAddress());
-                    user.setEmail(newUser.getEmail());
-                    user.setName(newUser.getName());
-                    user.setPassword(newUser.getPassword());
-                    user.setPhone(newUser.getPhone());
-
-                    return usersRepository.save(user);
-                })
-                .orElseThrow(()->new UserNotFoundException(username));
-    }
 
     //To Delete any user by its username
     @DeleteMapping("/user/{username}")
