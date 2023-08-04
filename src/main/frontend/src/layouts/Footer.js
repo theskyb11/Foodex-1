@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/img/logo-exp-light.png';
+import {Link} from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -39,7 +40,7 @@ const Footer = () => {
                                     <a class="text-gray-500 cursor-pointer hover:text-gray-900">Pricing</a>
                                 </li>
                                 <li class="mt-3">
-                                    <a class="text-gray-500 cursor-pointer hover:text-gray-900">Partner With Us</a>
+                                    <Link to={"/partner"} class="text-gray-500 cursor-pointer hover:text-gray-900">Partner With Us</Link>
                                 </li>
                                 <li class="mt-3">
                                     <a class="text-gray-500 cursor-pointer hover:text-gray-900">Ride With Us</a>

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Profile from "../features/account/components/Profile";
 import PaymentMethods from "../features/account/components/PaymentMethods";
 import PrivacySecurity from "../features/account/components/Privacy";
@@ -6,9 +6,10 @@ import Orders from "../features/account/components/Orders";
 import Transactions from "../features/account/components/Transactions";
 import Settings from "../features/account/components/Settings";
 import Navbar from "../layouts/Navbar";
-import LoadingBar from "react-top-loading-bar";
+import TopLoadingBar from "../components/TopLoadingBar";
+import CheckLogin from "../components/CheckLogin";
 
-function Account() {
+const Account = () => {
     const [selectedTab, setSelectedTab] = useState('profile');
 
     // Render the component based on the selected tab
@@ -31,39 +32,17 @@ function Account() {
         }
     };
 
-    const [progress, setProgress] = useState(0);
-
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setProgress((prevProgress) => {
-                const newProgress = prevProgress + 100;
-                if (newProgress >= 100) {
-                    clearInterval(timer);
-                }
-                return newProgress;
-            });
-        }, 50);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
     return (
         <div className={"bg-gray-100 w-full h-screen"}>
-            <LoadingBar
-                color='#1e53ff'
-                progress={progress}
-                loaderSpeed={250}
-            />
+            <CheckLogin />
+            <TopLoadingBar />
             <Navbar />
             <h4 className={"font-bold text-2xl pl-10 pt-8"}>Account Settings</h4>
             <div className={"rounded-2xl  bg-white flex w-8/9 mx-10 my-8 "}>
                 <div className="flex-none flex-col w-1/5 border-r-2 border-gray-100 pl-8">
                     <p
                         className={`p-2 mt-6 cursor-pointer duration-100 text-l_grey font-sans text-sm ${
-                            selectedTab === 'profile' ? 'font-bold text-gray-800 bg-gray-100 border-r-2 border-r-blue' : ''
+                            selectedTab === 'profile' ? 'font-bold text-black bg-gray-100 border-r-2 border-r-blue' : ''
                         }`}
                         onClick={() => setSelectedTab('profile')}
                     >
@@ -71,7 +50,7 @@ function Account() {
                     </p>
                     <p
                         className={`p-2 my-4 cursor-pointer duration-100 text-l_grey font-sans text-sm ${
-                            selectedTab === 'paymentMethods' ? 'font-bold text-gray-800 bg-gray-100 border-r-2 border-r-blue' : ''
+                            selectedTab === 'paymentMethods' ? 'font-bold text-black bg-gray-100 border-r-2 border-r-blue' : ''
                         }`}
                         onClick={() => setSelectedTab('paymentMethods')}
                     >
@@ -79,7 +58,7 @@ function Account() {
                     </p>
                     <p
                         className={`p-2 my-4 cursor-pointer duration-100 text-l_grey font-sans text-sm ${
-                            selectedTab === 'privacySecurity' ? 'font-bold text-gray-800 bg-gray-100 border-r-2 border-r-blue' : ''
+                            selectedTab === 'privacySecurity' ? 'font-bold text-black bg-gray-100 border-r-2 border-r-blue' : ''
                         }`}
                         onClick={() => setSelectedTab('privacySecurity')}
                     >
@@ -87,7 +66,7 @@ function Account() {
                     </p>
                     <p
                         className={`p-2 my-4 cursor-pointer duration-100 text-l_grey font-sans text-sm ${
-                            selectedTab === 'orders' ? 'font-bold text-gray-800 bg-gray-100 border-r-2 border-r-blue' : ''
+                            selectedTab === 'orders' ? 'font-bold text-black bg-gray-100 border-r-2 border-r-blue' : ''
                         }`}
                         onClick={() => setSelectedTab('orders')}
                     >
@@ -95,7 +74,7 @@ function Account() {
                     </p>
                     <p
                         className={`p-2 my-4 cursor-pointer duration-100 text-l_grey font-sans text-sm ${
-                            selectedTab === 'transactions' ? 'font-bold text-gray-800 bg-gray-100 border-r-2 border-r-blue' : ''
+                            selectedTab === 'transactions' ? 'font-bold text-black bg-gray-100 border-r-2 border-r-blue' : ''
                         }`}
                         onClick={() => setSelectedTab('transactions')}
                     >
@@ -103,7 +82,7 @@ function Account() {
                     </p>
                     <p
                         className={`p-2 my-4 cursor-pointer duration-100 text-l_grey font-sans text-sm ${
-                            selectedTab === 'settings' ? 'font-bold text-gray-800 bg-gray-100 border-r-2 border-r-blue' : ''
+                            selectedTab === 'settings' ? 'font-bold text-black bg-gray-100 border-r-2 border-r-blue' : ''
                         }`}
                         onClick={() => setSelectedTab('settings')}
                     >

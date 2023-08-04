@@ -1,48 +1,70 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../features/authentication/assets/login.css';
 import logo from "../assets/img/logo-exp-light.png";
 import {Link} from "react-router-dom";
 import highlight from "../features/authentication/assets/highlight.jpg";
 import {signInUser} from "../features/authentication/services/loginUser";
 import {toast} from "react-toastify";
+import TopLoadingBar from "../components/TopLoadingBar";
+import {isLoggedIn, isLoggedIn_session, previousLink} from "../data/constants";
+import Button from "../components/button";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    if(isLoggedIn || isLoggedIn_session)
+      if(previousLink)
+        window.location.href = previousLink
+      else
+        window.location.href = '/home'
+  }, []);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
-    signInUser(email, password)
-        .then((response) => {
-          if (response) {
-            // Authentication successful
-            if (remember) {
-              localStorage.setItem('email', email);
-              localStorage.setItem('remember', true);
-            } else {
-              localStorage.removeItem('email');
-              localStorage.removeItem('remember');
-            }
+    try {
+      const response = await signInUser(email, password);
+      if (response) {
+        if (remember) {
+          localStorage.setItem('isLoggedIn', true);
+          localStorage.setItem('email', email);
+          localStorage.setItem('remember', true);
+        } else {
+          sessionStorage.setItem('isLoggedIn', true);
+          sessionStorage.setItem('email', email);
+          sessionStorage.setItem('remember', true);
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('email');
+          localStorage.removeItem('remember');
+        }
 
-            toast.success('Sign in successful!');
-            console.log('Sign-in successful');
-          } else {
-            toast.error('Email or Password is incorrect!');
-            console.log('Sign-in failed');
-          }
-        })
-        .catch((error) => {
-          toast.error('Error while signing in!');
-          console.error('Error while signing in:', error);
-        });
+        if(previousLink)
+          window.location.href = previousLink
+        else
+          window.location.href = '/home'
+        toast.success('Sign in successful!');
+      } else {
+        toast.error('Email or Password is incorrect!');
+      }
+    } catch (error) {
+      toast.error('Error while signing in!');
+      console.error('Error while signing in:', error);
+    }
+
+    setIsLoading(false);
   };
 
   return (
       <div className={"parent-container m-auto grid grid-cols-2 max-md:grid-cols-1 h-screen"}>
+        <TopLoadingBar />
+
         <div className={"tile h-full"}>
           <div className={"flex flex-col items-center justify-center h-full"}>
-            <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+            <div className="flex min-h-full flex-col justify-center px-6 py-4 lg:px-8">
               <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img className="mx-auto h-10 w-auto scale-50"
                      src={logo}
@@ -164,10 +186,11 @@ const Login = () => {
                   </div>
 
                   <div>
-                    <button type="submit"
-                            className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">Sign
-                      in
-                    </button>
+                    {/*<button type="submit"*/}
+                    {/*        className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">Sign*/}
+                    {/*  in*/}
+                    {/*</button>*/}
+                    <Button isLoading={isLoading} onClick={handleSubmit} text="Sign in" />
                   </div>
                 </form>
 

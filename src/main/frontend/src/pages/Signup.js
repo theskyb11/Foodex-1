@@ -4,7 +4,7 @@ import highlight from '../features/authentication/assets/highlight.jpg';
 import {Link} from "react-router-dom";
 import logo from '../assets/img/logo-exp-light.png';
 import PasswordStrengthBar from "react-password-strength-bar";
-import LoadingBar from "react-top-loading-bar";
+import {isLoggedIn, isLoggedIn_session, previousLink} from "../data/constants";
 
 const SignUpForm = () => {
     const [username, setUsername] = useState('');
@@ -15,6 +15,14 @@ const SignUpForm = () => {
     const [phone, setPhone] = useState('');
     const [showAdditionalFields, setShowAdditionalFields] = useState(false);
     const [showSocialButtons, setShowSocialButtons] = useState(true);
+
+    useEffect(() => {
+        if(isLoggedIn || isLoggedIn_session)
+            if(previousLink)
+                window.location.href = previousLink
+            else
+                window.location.href = '/home'
+    }, []);
 
     const handleContinueClick = () => {
         if (name && email) {
@@ -53,32 +61,8 @@ const SignUpForm = () => {
         }
     };
 
-    const [progress, setProgress] = useState(0);
-
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setProgress((prevProgress) => {
-                const newProgress = prevProgress + 100;
-                if (newProgress >= 100) {
-                    clearInterval(timer);
-                }
-                return newProgress;
-            });
-        }, 50);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
     return (
         <div className={"parent-container m-auto grid grid-cols-2 max-md:grid-cols-1 h-screen"}>
-            <LoadingBar
-                color='#1e53ff'
-                progress={progress}
-                loaderSpeed={250}
-            />
             <div className={"tile h-full"}>
                 <div className={"flex flex-col items-center justify-center h-full"}>
                     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
