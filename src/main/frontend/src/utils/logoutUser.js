@@ -5,11 +5,13 @@ export default function logoutUser() {
     {
         localStorage.removeItem('isLoggedIn')
         localStorage.removeItem('remember')
-        localStorage.removeItem('email')
+        // localStorage.removeItem('email')
+        localStorage.removeItem('username')
     } else {
         sessionStorage.removeItem('isLoggedIn')
         sessionStorage.removeItem('remember')
-        sessionStorage.removeItem('email')
+        // sessionStorage.removeItem('email')
+        sessionStorage.removeItem('username')
     }
 
     window.location.reload();

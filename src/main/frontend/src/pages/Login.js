@@ -10,6 +10,7 @@ import {isLoggedIn, isLoggedIn_session, previousLink} from "../data/constants";
 import Button from "../components/button";
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -27,18 +28,22 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await signInUser(email, password);
+      // const response = await signInUser(email, password);
+      const response = await signInUser(username, password);
       if (response) {
         if (remember) {
           localStorage.setItem('isLoggedIn', true);
-          localStorage.setItem('email', email);
+          // localStorage.setItem('email', email);
+          localStorage.setItem('username', username);
           localStorage.setItem('remember', true);
         } else {
           sessionStorage.setItem('isLoggedIn', true);
-          sessionStorage.setItem('email', email);
+          // sessionStorage.setItem('email', email);
+          sessionStorage.setItem('username', username);
           sessionStorage.setItem('remember', true);
           localStorage.removeItem('isLoggedIn');
-          localStorage.removeItem('email');
+          // localStorage.removeItem('email');
+          localStorage.setItem('username', username);
           localStorage.removeItem('remember');
         }
 
@@ -49,6 +54,7 @@ const Login = () => {
         toast.success('Sign in successful!');
       } else {
         toast.error('Email or Password is incorrect!');
+        console.log(username);
       }
     } catch (error) {
       toast.error('Error while signing in!');
@@ -149,14 +155,26 @@ const Login = () => {
                 <p className={"text-gray-700 flex items-center justify-center mb-4"}>Or</p>
 
                 <form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
+                  {/*<div>*/}
+                  {/*  <label htmlFor="email"*/}
+                  {/*         className="block text-sm font-medium leading-6 text-gray-900">Email*/}
+                  {/*    address</label>*/}
+                  {/*  <div className="mt-2">*/}
+                  {/*    <input id="email" name="email" type="email" autoComplete="email" required*/}
+                  {/*           value={email}*/}
+                  {/*           onChange={(e) => setEmail(e.target.value)}*/}
+                  {/*           className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" />*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
+
                   <div>
-                    <label htmlFor="email"
-                           className="block text-sm font-medium leading-6 text-gray-900">Email
-                      address</label>
+                    <label htmlFor="username"
+                           className="block text-sm font-medium leading-6 text-gray-900">Username
+                      </label>
                     <div className="mt-2">
-                      <input id="email" name="email" type="email" autoComplete="email" required
-                             value={email}
-                             onChange={(e) => setEmail(e.target.value)}
+                      <input id="username" name="username" type="username" autoComplete="username" required
+                             value={username}
+                             onChange={(e) => setUsername(e.target.value)}
                              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6" />
                     </div>
                   </div>

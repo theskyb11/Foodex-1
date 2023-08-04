@@ -8,7 +8,7 @@ import { FiGlobe } from "react-icons/fi";
 import { BiDrink, BiSolidFoodMenu } from "react-icons/bi";
 import { PiBowlFoodBold } from "react-icons/pi";
 import {GiChickenOven, GiIndianPalace} from "react-icons/gi";
-import {getItems} from "../features/items/ItemsSort";
+import {getItems, getItemsImage} from "../features/items/ItemsSort";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import {GrLocationPin} from "react-icons/gr";
@@ -91,7 +91,7 @@ const Items = () => {
             <LoadingBar color='#1e53ff' progress={progress} loaderSpeed={250} />
             <Navbar />
 
-            <div className='relative flex gap-10 items-center bg-indigo-950'>
+            <div className='relative mt-[98px] flex gap-10 items-center bg-indigo-950'>
                 <MdChevronLeft
                     className='opacity-50 cursor-pointer hover:opacity-100 bg-stone-300 rounded-2xl '
                     onClick={slideLeft}
@@ -237,6 +237,9 @@ const Items = () => {
                     {displayedItems.map((item, index) => (
                         <div key={index} className={'flex bg-white relative w-[260px] h-[270px] rounded-2xl justify-center flex-col my-4 transition-all duration-300 ease-in-out hover:scale-110 shadow-2xl'}>
                             <img src={carousel1} className={'w-[235px] h-[185px] mx-auto rounded-2xl'} />
+                            {/*{item.images && item.images.length > 0 && (*/}
+                            {/*    <img src={`data:image/jpeg;base64,${item.images[0].data}`} className={'w-[235px] h-[185px] mx-auto rounded-2xl'} alt={item.name} />*/}
+                            {/*)}*/}
                             <div className="flex items-center justify-between">
                                 <div className="flex flex-col relative">
                                     <p className="font-black text-black text-start mt-2 ml-2 text-[16px]">{item.name}</p>

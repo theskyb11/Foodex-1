@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import logo from '../assets/img/logo-exp-light.png';
 import PasswordStrengthBar from "react-password-strength-bar";
 import {isLoggedIn, isLoggedIn_session, previousLink} from "../data/constants";
+import {checkEmailAvailability, checkUsernameAvailability} from "../services/getUser";
 
 const SignUpForm = () => {
     const [username, setUsername] = useState('');
@@ -60,6 +61,28 @@ const SignUpForm = () => {
         } catch (error) {
         }
     };
+
+    const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
+
+    // Effect to trigger username availability check whenever the username changes
+    useEffect(() => {
+        if (username.trim() !== '') {
+            checkUsernameAvailability(username).then((available) => {
+                setIsUsernameAvailable(available);
+            });
+        }
+    }, [username]);
+
+    const [isEmailAvailable, setIsEmailAvailable] = useState(true);
+
+    // Effect to trigger username availability check whenever the username changes
+    useEffect(() => {
+        if (email.trim() !== '') {
+            checkEmailAvailability(email).then((available) => {
+                setIsEmailAvailable(available);
+            });
+        }
+    }, [email]);
 
     return (
         <div className={"parent-container m-auto grid grid-cols-2 max-md:grid-cols-1 h-screen"}>
@@ -212,6 +235,22 @@ const SignUpForm = () => {
                                         <p className={"text-gray-700 flex items-center justify-center mb-4"}>Or</p>
 
                                         <div>
+                                            <label htmlFor="username"
+                                                   className="block text-sm font-medium leading-6 text-gray-900">Username
+                                                </label>
+                                            <div className="mt-2">
+                                                <input id="username" name="username" type="text" required
+                                                       className="block w-full rounded-md border-0 px-3 py-1.5 mb-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
+                                                       value={username}
+                                                       onChange={(e) => setUsername(e.target.value)}/>
+                                            </div>
+                                        </div>
+
+                                        {!isUsernameAvailable && (
+                                            <p className="text-red">Username is already taken. Please choose a different one.</p>
+                                        )}
+
+                                        <div>
                                             <label htmlFor="name"
                                                    className="block text-sm font-medium leading-6 text-gray-900">Full
                                                 Name</label>
@@ -238,11 +277,21 @@ const SignUpForm = () => {
                                             </div>
                                         </div>
 
+                                        {!isEmailAvailable && (
+                                            <p className="text-red">An account already exists using this email address!!</p>
+                                        )}
+
                                         <div>
+                                            {!isUsernameAvailable
+                                            //     && (
+                                            //     <p className="text-red-500">Username is already taken. Please choose a different one.</p>
+                                            // )
+                                            }
                                             <button type="button"
                                                     id="continueButton"
                                                     onClick={handleContinueClick}
-                                                    className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 mt-4 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Continue
+                                                    className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 mt-4 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                    disabled={!isUsernameAvailable && !isEmailAvailable}>Continue
                                             </button>
                                         </div>
                                     </div>
