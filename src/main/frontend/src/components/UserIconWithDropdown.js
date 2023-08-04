@@ -38,7 +38,8 @@ const UserIconWithDropdown = () => {
                 <div className="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg">
                     <div className="p-4">
                         <p><b>{user.name}</b></p>
-                        <p className={"text-sm text-gray-400"}>{user.email}</p>
+                        {/*<p className={"text-sm text-gray-400"}>{user.email}</p>*/}
+                        <p className={"text-sm text-gray-400"}>{user.username}</p>
                     </div>
                     <hr/>
                     <div className={"flex flex-col w-full my-4"}>
