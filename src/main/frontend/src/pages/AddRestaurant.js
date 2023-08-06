@@ -76,19 +76,19 @@ const AddRestaurant = () => {
                                         className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
                                         placeholder="Restaurant Name*"
                                         name="a"
-                                        value={}
-                                        onChange={}
+                                        value={resName}
+                                        onChange={(e) => setResName(e.target.value)}
                                     /><br/>
                                     <input type="text" id="address"
                                            className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
                                            placeholder="Restaurant Address" name="b"
-                                           value={}
-                                           onChange={}/><br/>
+                                           value={resAddress}
+                                           onChange={(e) => setResAddress(e.target.value)}/><br/>
                                     <input type="text" id="license-number"
                                            className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
                                            placeholder="FSSAI License Number (14 Digit)*" name="l"
-                                           value={}
-                                           onChange={}/><br/>
+                                           value={resId}
+                                           onChange={(e) => setResId(e.target.value)}/><br/>
 
                                     <h4 className={"font-bold"}>Please place the pin accurately at your outlet’s
                                         location on the map</h4>
@@ -168,6 +168,8 @@ const AddRestaurant = () => {
                                         className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
                                         placeholder="Mobile Number for Enquiries"
                                         name="c"
+                                        value={mobNo}
+                                        onChange={(e) => setMobNo(e.target.value)}
                                     />
                                     <br/><p className={"font-bold mb-4"}>Manager Information</p>
                                     <input type="text" id="man_name"
