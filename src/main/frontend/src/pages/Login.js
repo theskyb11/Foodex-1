@@ -9,7 +9,6 @@ import TopLoadingBar from "../components/TopLoadingBar";
 import {isLoggedIn, isLoggedIn_session, previousLink} from "../data/constants";
 import Button from "../components/button";
 const Login = () => {
-  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState('');
