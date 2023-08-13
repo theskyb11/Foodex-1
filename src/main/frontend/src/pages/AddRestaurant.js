@@ -21,7 +21,7 @@ const AddRestaurant = () => {
     const [manEmail, setManEmail] = useState('');
     const [manNo, setManNo] = useState('');
     const [type, setType] = useState('');
-    const [cuisine, setCuisine] = useState([]);
+    const [cuisine, setCuisine] = useState('');
     const [openingTime, setOpeningTime] = useState('');
     const [closingTime, setClosingTime] = useState('');
     const [file, setFile] = useState('');
@@ -174,24 +174,17 @@ const AddRestaurant = () => {
                                     <br/><p className={"font-bold mb-4"}>Manager Information</p>
                                     <input type="text" id="man_name"
                                            className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
-                                           placeholder="Manager Name" name="d"
-                                           value={manName}
-                                           onChange={(e) => setManName(e.target.value)}
-                                    />
+                                           placeholder="Manager Name" name="d"/>
                                     <br/><input type="email" id="man_email"
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
-                                                placeholder="Manager Email" name="e"
-                                                value={manEmail}
-                                                onChange={(e) => setManEmail(e.target.value)}/>
+                                                placeholder="Manager Email" name="e"/>
                                     <br/>
                                     <div className=""><input type="text"
                                                              maxLength="10"
                                                              id="phone1"
                                                              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
                                                              placeholder="Manager Mobile Number"
-                                                             name="f"
-                                                             value={manNo}
-                                                             onChange={(e) => setManNo(e.target.value)}/>
+                                                             name="f"/>
                                     </div>
                                     <br/>
                                 </div>
@@ -261,135 +254,85 @@ const AddRestaurant = () => {
                                         <div className="mr-6">
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Bakery"
-                                                   checked={type === 'Bakery'}
-                                                   onChange={(e) => setType(e.target.value)}/> Bakery<br/><br/>
+                                                   value="Bakery"/> Bakery<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Bhojanalya"
-                                                   checked={type === 'Bhojanalya'}
-                                                   onChange={(e) => setType(e.target.value)}/> Bhojanalya<br/><br/>
+                                                   value="Bhojanalya"/> Bhojanalya<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Casual Dining"
-                                                   checked={type === 'Casual Dining'}
-                                                   onChange={(e) => setType(e.target.value)}/> Casual Dining<br/><br/>
+                                                   value="Casual Dining"/> Casual Dining<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Confectionery"
-                                                   checked={type === 'Confectionery'}
-                                                   onChange={(e) => setType(e.target.value)}/> Confectionery<br/><br/>
+                                                   value="Confectionery"/> Confectionery<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Fine Dining"
-                                                   checked={type === 'Fine Dining'}
-                                                   onChange={(e) => setType(e.target.value)}/> Fine Dining<br/><br/>
+                                                   value="Fine Dining"/> Fine Dining<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Irani Cafe"
-                                                   checked={type === 'Irani Cafe'}
-                                                   onChange={(e) => setType(e.target.value)}/> Irani Cafe<br/><br/>
+                                                   value="Irani Cafe"/> Irani Cafe<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Mess"
-                                                   checked={type === 'Mess'}
-                                                   onChange={(e) => setType(e.target.value)}/> Mess<br/><br/>
+                                                   value="Mess"/> Mess<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Pub"
-                                                   checked={type === 'Pub'}
-                                                   onChange={(e) => setType(e.target.value)}/> Pub<br/><br/>
+                                                   value="Pub"/> Pub<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Sweet Shop"
-                                                   checked={type === 'Sweet Shop'}
-                                                   onChange={(e) => setType(e.target.value)}/> Sweet Shop<br/><br/>
+                                                   value="Sweet Shop"/> Sweet Shop<br/><br/>
                                         </div>
 
                                         <div className="mr-6">
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Bar"
-                                                   checked={type === 'Bar'}
-                                                   onChange={(e) => setType(e.target.value)}/> Bar<br/><br/>
+                                                   value="Bar"/> Bar<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Butcher Shop"
-                                                   checked={type === 'Butcher Shop'}
-                                                   onChange={(e) => setType(e.target.value)}/> Butcher Shop<br/><br/>
+                                                   value="Butcher Shop"/> Butcher Shop<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Club"
-                                                   checked={type === 'Club'}
-                                                   onChange={(e) => setType(e.target.value)}/> Club<br/><br/>
+                                                   value="Club"/> Club<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Dessert Parlour"
-                                                   checked={type === 'Dessert Parlour'}
-                                                   onChange={(e) => setType(e.target.value)}/> Dessert Parlour<br/><br/>
+                                                   value="Dessert Parlour"/> Dessert Parlour<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Food Court"
-                                                   checked={type === 'Food Court'}
-                                                   onChange={(e) => setType(e.target.value)}/> Food Court<br/><br/>
+                                                   value="Food Court"/> Food Court<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Kiosk"
-                                                   checked={type === 'Kiosk'}
-                                                   onChange={(e) => setType(e.target.value)}/> Kiosk<br/><br/>
+                                                   value="Kiosk"/> Kiosk<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Microbrewery"
-                                                   checked={type === 'Microbrewery'}
-                                                   onChange={(e) => setType(e.target.value)}/> Microbrewery<br/><br/>
+                                                   value="Microbrewery"/> Microbrewery<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Quick Bites"
-                                                   checked={type === 'Quick Bites'}
-                                                   onChange={(e) => setType(e.target.value)}/> Quick Bites<br/>
+                                                   value="Quick Bites"/> Quick Bites<br/>
                                         </div>
 
                                         <div className="mr-6">
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Beverage Shop"
-                                                   checked={type === 'Beverage Shop'}
-                                                   onChange={(e) => setType(e.target.value)}/> Beverage Shop<br/><br/>
+                                                   value="Beverage Shop"/> Beverage Shop<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Café"
-                                                   checked={type === 'Café'}
-                                                   onChange={(e) => setType(e.target.value)}/> Cafe<br/><br/>
+                                                   value="Café"/> Cafe<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Cocktail Bar"
-                                                   checked={type === 'Cocktail Bar'}
-                                                   onChange={(e) => setType(e.target.value)}/> Cocktail Bar<br/><br/>
+                                                   value="Cocktail Bar"/> Cocktail Bar<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Dhaba"
-                                                   checked={type === 'Dhaba'}
-                                                   onChange={(e) => setType(e.target.value)}/> Dhaba<br/><br/>
+                                                   value="Dhaba"/> Dhaba<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Food Truck"
-                                                   checked={type === 'Food Truck'}
-                                                   onChange={(e) => setType(e.target.value)}/> Food Truck<br/><br/>
+                                                   value="Food Truck"/> Food Truck<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Lounge"
-                                                   checked={type === 'Lounge'}
-                                                   onChange={(e) => setType(e.target.value)}/> Lounge<br/><br/>
+                                                   value="Lounge"/> Lounge<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Paan Shop"
-                                                   checked={type === 'Paan Shop'}
-                                                   onChange={(e) => setType(e.target.value)}/> Paan Shop<br/><br/>
+                                                   value="Paan Shop"/> Paan Shop<br/><br/>
                                             <input name="g" type="radio"
                                                    className="w-4 h-4 bg-gray-100 border-gray-300"
-                                                   value="Shack"
-                                                   checked={type === 'Shack'}
-                                                   onChange={(e) => setType(e.target.value)}/> Shack<br/>
+                                                   value="Shack"/> Shack<br/>
                                         </div>
                                     </div>
                                 </div>

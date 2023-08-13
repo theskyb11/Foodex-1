@@ -6,6 +6,7 @@ import com.foodex.foodex1.offers.Offers;
 import com.foodex.foodex1.res_images.Res_images;
 import com.foodex.foodex1.res_rate.Res_rate;
 import com.foodex.foodex1.users.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -27,6 +28,7 @@ public class Restaurants {
     private float rating;
     private LocalTime openingTime;
     private LocalTime closingTime;
+    @JsonIgnore
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Items> items;
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)

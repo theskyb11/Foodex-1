@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Deliver_address")
-public class Deliver_address {
+public class DeliverAddress {
     public Integer getDel_id() {
         return del_id;
     }
@@ -41,12 +41,12 @@ public class Deliver_address {
             foreignKey = @ForeignKey(name = "deliver_address_ibfk_1"))
     private Users users;
 
-    public Deliver_address() {
+    public DeliverAddress() {
     }
 
-    public Deliver_address(Integer del_id, String name, String address) {
-        this.del_id = del_id;
+    public DeliverAddress(String name, String address, Users users) {
         this.name = name;
         this.address = address;
+        this.users = users;
     }
 }

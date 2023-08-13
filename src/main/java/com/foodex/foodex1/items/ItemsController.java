@@ -1,11 +1,9 @@
 package com.foodex.foodex1.items;
 
+import com.foodex.foodex1.restaurants.Restaurants;
 import com.foodex.foodex1.users.Users;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -15,6 +13,11 @@ public class ItemsController {
 
     @Autowired
     private ItemsRepository itemsRepository;
+
+    @GetMapping("/itemss")
+    public List<Items> getAllItems() {
+        return itemsRepository.findAll();
+    }
 
     @GetMapping("/items/{type}")
     public List<Map<String, Object>> getItemsByType(@PathVariable String type) {
@@ -79,6 +82,11 @@ public class ItemsController {
         List<Map<String, Object>> formattedItems = new ArrayList<>();
         for (Items item : items) {
             Map<String, Object> formattedItem = new HashMap<>();
+            formattedItem.put("itemid", item.getItem_id());
+            Restaurants restaurant = item.getRestaurants();
+            if (restaurant != null) {
+                formattedItem.put("resid", restaurant.getRes_id());
+            }
             formattedItem.put("name", item.getItem_name());
             formattedItem.put("price", item.getPrice());
             formattedItem.put("rating", item.getRating());
