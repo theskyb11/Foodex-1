@@ -51,6 +51,17 @@ export const checkUsernameAvailability = (username) => {
         });
 };
 
+export const deliverAddressusers = async (username) => {
+    let response;
+    try{
+        response = await axios.get(`http://localhost:8085/deliver_address/${username}`);
+        return response.data;
+    }
+    catch(error){
+        return null;
+    }
+}
+
 export const checkEmailAvailability = (email) => {
     return axios
         .get(`http://localhost:8085/user/email/${email}`)

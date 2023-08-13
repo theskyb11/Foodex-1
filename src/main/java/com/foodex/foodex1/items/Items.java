@@ -4,6 +4,7 @@ import com.foodex.foodex1.cart.Cart;
 import com.foodex.foodex1.item_images.Item_images;
 import com.foodex.foodex1.item_rate.Item_rate;
 import com.foodex.foodex1.restaurants.Restaurants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class Items {
     private Float price;
     private Float rating;
     private String description;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "res_id", referencedColumnName = "res_id", foreignKey = @ForeignKey(name = "fk_items_restaurants"))
     private Restaurants restaurants;
