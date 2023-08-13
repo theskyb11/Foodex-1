@@ -110,6 +110,7 @@ function SearchControl({ onMarkerPositionChange }) {
             style: 'bar',
             showMarker: false, // We don't need to show a separate marker, we'll use the Marker component instead.
             showPopup: false,
+
             marker: {
                 icon: new L.Icon.Default(),
                 draggable: true,
