@@ -33,8 +33,8 @@ public class Restaurants {
     private List<Items> items;
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Res_images> res_images;
-    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Cart> cart;
+    //    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Cart> cart;
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Res_rate> res_rate;
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -43,7 +43,8 @@ public class Restaurants {
     @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(name = "fk_restaurants_users"))
     private Users users;
 
-    public Restaurants(Long res_id, String res_name, String manager, String email, Long phone, String address, Long res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users, List<Cart> cart, List<Offers> offers) {
+    //    public Restaurants(Long res_id, String res_name, String manager, String email, Long phone, String address, Long res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users, List<Cart> cart, List<Offers> offers) {
+    public Restaurants(Long res_id, String res_name, String manager, String email, Long phone, String address, Long res_phone, String cuisine, Integer type, float rating, LocalTime openingTime, LocalTime closingTime, List<Items> items, List<Res_images> res_images, List<Res_rate> res_rate, Users users, List<Offers> offers) {
         this.res_id = res_id;
         this.res_name = res_name;
         this.manager = manager;
@@ -60,7 +61,7 @@ public class Restaurants {
         this.res_images = res_images;
         this.res_rate = res_rate;
         this.users = users;
-        this.cart = cart;
+//        this.cart = cart;
         this.offers = offers;
     }
 
@@ -184,13 +185,13 @@ public class Restaurants {
         return res_rate;
     }
 
-    public List<Cart> getCart() {
-        return cart;
-    }
-
-    public void setCart(List<Cart> cart) {
-        this.cart = cart;
-    }
+    //    public List<Cart> getCart() {
+//        return cart;
+//    }
+//
+//    public void setCart(List<Cart> cart) {
+//        this.cart = cart;
+//    }
     public List<Offers> getOffers() {
         return offers;
     }

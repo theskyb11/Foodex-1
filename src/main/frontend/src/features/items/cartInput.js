@@ -17,6 +17,25 @@ export const getQuantity = async (username, item_id) => {
     }
 }
 
+export const checkCart = async (username, itemid) => {
+    try {
+        const response = await axios.get(`http://localhost:8085/cart/check/${username}/${itemid}`);
+        const cart = response.data;
+
+        if (cart.length === 0) {
+            console.log('No items');
+            return false;
+        } else {
+            console.log('Items present');
+            return true; // Item in cart
+        }
+    } catch (error) {
+        console.error('Error while fetching cart items:', error);
+        return null;
+    }
+};
+
+
 
 // export function useCartItemQuantity
 // (username, items) {

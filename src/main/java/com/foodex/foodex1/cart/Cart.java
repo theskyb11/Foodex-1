@@ -1,43 +1,24 @@
 package com.foodex.foodex1.cart;
 
-import com.foodex.foodex1.items.Items;
-import com.foodex.foodex1.restaurants.Restaurants;
-import com.foodex.foodex1.users.Users;
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 
 @Entity
-@Table(name = "cart",
-        uniqueConstraints = @UniqueConstraint(name = "unique_cart_username_item_id", columnNames = {"username", "item_id"}))
-
+@Table(
+        name = "cart",
+        uniqueConstraints = @UniqueConstraint(name = "unique_cart_username_item_id", columnNames = {"username", "item_id"})
+)
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "username", referencedColumnName = "username",
-            foreignKey = @ForeignKey(name = "fk_cart_users"))
-    private Users users;
-
-    @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "item_id",
-            foreignKey = @ForeignKey(name = "fk_cart_items"),
-            insertable = false, updatable = false) // Add these attributes
-    private Items items;
-
-    @ManyToOne
-    @JoinColumn(name = "res_id", referencedColumnName = "res_id",
-            foreignKey = @ForeignKey(name = "fk_cart_restaurants"))
-    private Restaurants restaurants;
+    @Column (name="item_id")
+    private Long itemId;
 
     public Cart() {
     }
 
-    public Cart(Integer quantity) {
-        this.quantity = quantity;
-    }
+    private Long res_id;
 
     public Integer getId() {
         return id;
@@ -45,6 +26,30 @@ public class Cart {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public Long getRes_id() {
+        return res_id;
+    }
+
+    public void setRes_id(Long res_id) {
+        this.res_id = res_id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getQuantity() {
@@ -55,31 +60,17 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public Users getUsers() {
-        return users;
+    public Cart(Integer id, Long itemId, Long res_id, String username, Integer quantity) {
+        this.id = id;
+        this.itemId = itemId;
+        this.res_id = res_id;
+        this.username = username;
+        this.quantity = quantity;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
-    }
+    private String username;
 
-    public Items getItems() {
-        return items;
-    }
+    private Integer quantity;
 
-    public void setItems(Items items) {
-        this.items = items;
-    }
-
-    public Restaurants getRestaurants() {
-        return restaurants;
-    }
-
-    public void setRestaurants(Restaurants restaurants, Users users, Items items) {
-        this.restaurants = restaurants;
-        this.items = items;
-        this.users = users;
-    }
-
-
+    // ... other variables, constructors, getters, setters
 }

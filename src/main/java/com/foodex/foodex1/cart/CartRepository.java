@@ -2,12 +2,17 @@ package com.foodex.foodex1.cart;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.List;
+
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
-    Optional <Cart> findByUsers_Username(String username);
+//    Cart findByUsernameAndItemId(String username, Long item_id);
+//Cart findByUsernameAndItemId(String username, Long itemId);
 
-    default Cart findByUsers_UsernameAndItemId(String username, Long item_id) {
-        return null;
-    }
+    List<Cart> findByUsername(String username);
+
+
+    List<Cart> findByUsernameAndItemId (String username, Long itemId);
+
+
 }

@@ -15,14 +15,14 @@ import {GrLocationPin} from "react-icons/gr";
 import {checkUsernameAvailability, GetUser} from "../services/getUser";
 import {LuShoppingCart} from "react-icons/lu";
 import {
-    useCartItemQuantity,
     addNewToCart,
+    checkCart,
     updateToCart,
-    getQuantity,
     removeFromCart
 } from "../features/items/cartInput";
 import {username} from "../data/constants";
 import * as userData from "../data/constants";
+// import {useCartStatus} from "../features/items/useCartStatus";
 
 const Items = () => {
 
@@ -52,12 +52,15 @@ const Items = () => {
         fetchItems(selectedType);
     }, [selectedType]);
 
-
     const fetchItems = async (type) => {
         try {
             const itemsData = await getItems(type);
             console.log(itemsData); // Log the fetched data
             setItems(itemsData);
+
+            // itemsData.forEach((item) => {
+            //     checkItemExistence(item.itemid);
+            // });
 
         } catch (error) {
             console.log("Error fetching items:", error);
@@ -164,10 +167,30 @@ const Items = () => {
 
     const displayedItems = showAllItems ? items : items.slice(0, 4);
 
-
     if (!items) {
         return <div>Loading...</div>;
     }
+
+    // let response;
+    //
+    // const Cartcheck = async (username, itemid) => {
+    //     try {
+    //         response = await checkCart(username, itemid);
+    //         if (response === true) {
+    //             console.log('Item is in the cart.');
+    //             return true;
+    //         } else if (response === false) {
+    //             console.log('Item is not in the cart.');
+    //             return false;
+    //         } else {
+    //             console.log('Error while checking cart.');
+    //             return true; // Set a default value if there's an error
+    //         }
+    //     } catch (error) {
+    //         console.error('Error while fetching cart items:', error);
+    //         return false; // Set a default value in case of an error
+    //     }
+    // }
 
     return (
         <div className={'h-screen scroll-smooth'}>
@@ -314,50 +337,123 @@ const Items = () => {
             </div>
 
             <div className="relative justify-center mt-4">
-                <div className={'grid grid-cols-4 mx-8 justify-center'}>
-                    {displayedItems.map((item, index) => (
-                        <div key={index}
-                             className={'flex bg-white relative w-[260px] h-[270px] rounded-2xl justify-center flex-col my-4 transition-all duration-300 ease-in-out hover:scale-110 shadow-2xl'}>
-                            <img src={carousel1} className={'w-[235px] h-[185px] mx-auto rounded-2xl'}/>
-                            {/*{item.images && item.images.length > 0 && (*/}
-                            {/*    <img src={`data:image/jpeg;base64,${item.images[0].data}`} className={'w-[235px] h-[185px] mx-auto rounded-2xl'} alt={item.name} />*/}
-                            {/*)}*/}
-                            <div className="flex items-center justify-between">
-                                <div className="flex flex-col relative">
-                                    <p className="font-black text-black text-start mt-2 ml-2 text-[16px]">{item.name}</p>
+                <div className="grid grid-cols-4 gap-4 mx-8 justify-center">
+                    {displayedItems.map((item, index) => {
+
+                        // let itemInCart = false;
+                        //
+                        // const username = userData.username;
+                        // const itemid = item.itemid;
+                        //
+                        // let responsePromise = checkCart(username, itemid);
+                        //
+                        // responsePromise.then(response => {
+                        //     if (response === true) {
+                        //         console.log('Item is in the cart.', response);
+                        //         itemInCart = true;
+                        //     } else if (response === false) {
+                        //         console.log('Item is not in the cart.', response);
+                        //         itemInCart = false;
+                        //     } else {
+                        //         console.log('Error while checking cart.', response);
+                        //         itemInCart = true; // Set a default value if there's an error
+                        //     }
+                        //
+                        //     console.log(itemInCart); // You can use itemInCart wherever you want
+                        // }).catch(error => {
+                        //     console.error('Error while fetching cart items:', error);
+                        //     itemInCart = false; // Set a default value in case of an error
+                        // });
+
+
+                        let itemInCart;
+
+                        let response;
+
+                        const Cartcheck = async (username, itemid) => {
+                            try {
+                                response = await checkCart(username, itemid);
+                                if (response === true) {
+                                    console.log('Item is in the cart.', response);
+                                    return true;
+                                } else if (response === false) {
+                                    console.log('Item is not in the cart.', response);
+                                    return false;
+                                } else {
+                                    console.log('Error while checking cart.', response);
+                                    return true; // Set a default value if there's an error
+                                }
+                            } catch (error) {
+                                console.error('Error while fetching cart items:', error);
+                                return false; // Set a default value in case of an error
+                            }
+                        }
+
+                        function checkCartItem() {
+                            Cartcheck(userData.username, item.itemid)
+                                .then(itemInCart => {
+                                    console.log('Item in cart:', itemInCart);
+                                    // console.log('Is it:', itemInCart, item.itemid);
+                                })
+                                .catch(error => {
+                                    console.error('An error occurred:', error);
+                                });
+                        }
+
+                        checkCartItem();
+
+                        console.log('Is it: ', itemInCart, item.itemid);
+
+                        return (
+                            <div key={index}
+                                 className="flex bg-white relative w-[260px] h-[270px] rounded-2xl justify-center flex-col my-4 transition-all duration-300 ease-in-out hover:scale-110 shadow-2xl">
+                                <img src={carousel1} className="w-[235px] h-[185px] mx-auto rounded-2xl"
+                                     alt={item.name}/>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex flex-col relative">
+                                        <p className="font-black text-black text-start mt-2 ml-2 text-[16px]">{item.name}</p>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <FaStar className="mx-1 text-yellow mt-1.5"/>
+                                        <p className="font-black text-black text-end mt-2 mr-2 text-[15px]">{item.rating}</p>
+                                    </div>
                                 </div>
-                                <div className="flex items-center">
-                                    <FaStar className={'mx-1 text-yellow mt-1.5'}/>
-                                    <p className="font-black text-black text-end mt-2 mr-2 text-[15px]">{item.rating}</p>
+                                <div
+                                    className="flex text-center mx-4 flex-col-2 gap-1 relative items-center justify-start">
+                                    <p className="text-black text-[14px]">₹ {item.price}</p>
+                                    <p className="text-cyan-600 ml-2 text-[14px]">|</p>
+                                    <div className="flex items-center">
+                                        <GrLocationPin className="text-[14px] text-rose-800"/>
+                                        <p className="text-black text-[14px]">KM</p>
+                                    </div>
+                                    <div className="mx-auto">
+                                        {
+                                            itemInCart ? (
+                                                <p className="text-black text-[14px]">Item already added to
+                                                    cart</p>
+                                            ) : (
+                                                <form onSubmit={addnewcart}>
+                                                    <input id="item_id" name="item_id" value={item.itemid}
+                                                           onChange={(e) => setItemid(e.target.value)} hidden/>
+                                                    <input id="res_id" name="res_id" value={item.resid}
+                                                           onChange={(e) => setResid(e.target.value)} hidden/>
+                                                    <input id="quantity" name="quantity" value={1}
+                                                           onChange={(e) => setQuant(e.target.value)} hidden/>
+                                                    <input id="username" name="username"
+                                                           value={userData.username}
+                                                           onChange={(e) => setUsername(e.target.value)}
+                                                           hidden/>
+                                                    <button type="submit"
+                                                            className="mx-auto text-xl text-green">
+                                                        <LuShoppingCart/>
+                                                    </button>
+                                                </form>
+                                            )}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex text-center mx-4 flex-col-2 gap-1 relative items-center justify-start">
-                                <p className="text-black text-[14px]">₹ {item.price}</p>
-                                {/*{console.log("Item ID:", item.item_id, "Res ID:", item.res_id);}*/}
-                                <p className="text-cyan-600 ml-2 text-[14px]">|</p>
-                                <div className="flex items-center">
-                                    <GrLocationPin className={'text-[14px] text-rose-800'}/>
-                                    <p className="text-black text-[14px]">KM</p>
-                                </div>
-                                {/*{console.log("ItemID:", item.item_id)}*/}
-                                <div className={'mx-auto'}>
-                                    <form onSubmit={addnewcart}>
-                                        <input id="item_id" name="item_id" value={item.itemid}
-                                               onChange={(e) => setItemid(e.target.value)} hidden/>
-                                        <input id="res_id" name="res_id" value={item.resid}
-                                               onChange={(e) => setResid(e.target.value)} hidden/>
-                                        <input id="quantity" name="quantity" value={1}
-                                               onChange={(e) => setQuant(e.target.value)} hidden/>
-                                        <input id="username" name="username" value={userData.username}
-                                               onChange={(e) => setUsername(e.target.value)} hidden/>
-                                        <button type="submit" className="mx-auto text-xl text-green">
-                                            <LuShoppingCart/>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
 

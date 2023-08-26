@@ -38,13 +38,14 @@ public class Users {
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DeliverAddress> Deliver_address;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Cart> cart;
+//    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Cart> cart;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User_Images> user_images;
 
-    public Users(String username, String name, Long phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate, List<DeliverAddress> Deliver_address, List<Cart> cart, List<User_Images> user_images) {
+    //    public Users(String username, String name, Long phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate, List<DeliverAddress> Deliver_address, List<Cart> cart, List<User_Images> user_images) {
+    public Users(String username, String name, Long phone, String email, String address, String password, String twofa, String secretcode, Date created_at, List<Restaurants> restaurants, List<Res_rate> res_rate, List<Item_rate> item_rate, List<DeliverAddress> Deliver_address, List<User_Images> user_images) {
         this.username = username;
         this.name = name;
         this.phone = phone;
@@ -58,7 +59,7 @@ public class Users {
         this.res_rate = res_rate;
         this.item_rate = item_rate;
         this.Deliver_address = Deliver_address;
-        this.cart = cart;
+//        this.cart = cart;
         this.user_images = user_images;
     }
 
@@ -161,12 +162,12 @@ public class Users {
     public List<DeliverAddress> getDeliver_address() {
         return Deliver_address;
     }
-    public List<Cart> getCart() {
-        return cart;
-    }
-    public void setCart(List<Cart> cart) {
-        this.cart = cart;
-    }
+//    public List<Cart> getCart() {
+//        return cart;
+//    }
+//    public void setCart(List<Cart> cart) {
+//        this.cart = cart;
+//    }
 
     public void setItem_rate(List<Item_rate> item_rate) {
         this.item_rate = item_rate;

@@ -13,8 +13,6 @@ export const getItems = async (type) => {
     }
 };
 
-
-
 // import axios from "axios";
 //
 // export const getItems = async (type) => {

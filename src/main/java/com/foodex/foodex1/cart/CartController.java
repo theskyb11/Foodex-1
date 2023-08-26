@@ -1,23 +1,47 @@
 package com.foodex.foodex1.cart;
 
-import com.foodex.foodex1.items.Items;
-import com.foodex.foodex1.restaurants.Restaurants;
-import com.foodex.foodex1.users.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@CrossOrigin("https://localhost/3000/")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/cart")
 public class CartController {
 
+    @Autowired
     private final CartRepository cartRepository;
 
-    @Autowired
     public CartController(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
     }
 
-    @PostMapping("/cart/add")
+//    @GetMapping("/check/{username}/{item_id}")
+//    public ResponseEntity<Boolean> checkCartItem(@PathVariable String username, @PathVariable Long item_id) {
+//        // Search for a cart item with the given username and item_id
+//        Cart cartItem = cartRepository.findByUsernameAndItemId(username, item_id);
+//
+//        boolean isItemInCart = cartItem != null;
+//        return new ResponseEntity<>(isItemInCart, HttpStatus.OK);
+//    }
+
+
+//    public CartController(CartRepository cartRepository) {
+//        this.cartRepository = cartRepository;
+//    }
+
+//    @GetMapping("/check/{username}")
+//    public List<Cart> getCartByUsername(@PathVariable String username) {
+//        return cartRepository.findByUsername(username);
+//    }
+
+    @GetMapping("/check/{username}/{item_id}")
+    public List<Cart> getCartByUsernameAndItemId(@PathVariable String username, @PathVariable Long item_id) {
+        return cartRepository.findByUsernameAndItemId(username, item_id);
+    }
+
+    @PostMapping("/add")
     public Cart addToCart(@RequestBody Cart cart) {
         // You may need to handle creating or updating the cart item here
         return cartRepository.save(cart);
@@ -34,13 +58,9 @@ public class CartController {
         cartRepository.delete(cart);
     }
 
-    @GetMapping("/cart/user/{username}/{item_id}")
-    public Integer getQuantityByUserAndItem(@PathVariable String username, @PathVariable Long item_id) {
-        Cart cart = cartRepository.findByUsers_UsernameAndItemId(username, item_id);
-        if (cart != null) {
-            return cart.getQuantity();
-        } else {
-            return null;
-        }
-    }
+//    @GetMapping("/check/{username}/{item_id}")
+//    public boolean checkCartItem(@PathVariable String username, @PathVariable Long item_id) {
+//        Cart cart = cartRepository.findByUsernameAndItemId(username, item_id);
+//        return cart != null;
+//    }
 }
