@@ -4,8 +4,7 @@ import logo from '../assets/img/logo-exp-light.png'
 import Typewriter from "typewriter-effect";
 import Footer from "../layouts/Footer";
 import img_hero from '../assets/img/img-hero.png'
-import banner1 from '../assets/img/banner 1.png'
-import banner2 from '../assets/img/banner 2.png'
+import poster from '../assets/img/poster.png'
 // import LoadingBar from "../components/LoadingBar";
 import LoadingBar from "react-top-loading-bar";
 import TopLoadingBar from "../components/TopLoadingBar";
@@ -226,7 +225,7 @@ const Home = () => {
             </section>
 
             <section className="h-full">
-
+                <img src={poster} alt={"Poster"} className={"scale-75"}/>
             </section>
             <Footer/>
         </div>
